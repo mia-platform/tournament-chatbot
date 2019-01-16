@@ -1,4 +1,4 @@
-const { Composer, log, session } = require('micro-bot')
+const { Composer, log, session, Markup } = require('micro-bot')
 
 const bot = new Composer()
 
@@ -10,5 +10,13 @@ bot.help(({ reply }) => reply('Help message'))
 bot.settings(({ reply }) => reply('Bot settings'))
 
 bot.command('date', ({ reply }) => reply(`Server time: ${Date()}`))
+
+/* custom commands */
+bot.command('create', ({ reply }) => {
+  return reply('Crea un Torneo', Markup.keyboard([['bottone1', 'bottone2']])
+    .resize()
+    .extra()
+  )
+})
 
 module.exports = bot
