@@ -1,0 +1,9 @@
+{
+  "name": "tournament-chatbot",
+  "version": "1.0.0",
+  "description": "Tournament chatbot for telegram",
+  "main": "index.js",
+  "repository": "https://github.com/mia-platform/tournament-chatbot.git",
+  "author": "Lime Lab ",
+  "license": "MIT"
+}
