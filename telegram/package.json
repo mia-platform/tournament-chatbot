@@ -8,6 +8,7 @@
   },
   "main": "index.js",
   "scripts": {
+    "dev:mock-server": "node ./mock-server/index.js",
     "dev": "supervisor -x micro-bot index.js",
     "start": "micro-bot",
     "now-start": "micro-bot -d ${NOW_URL}",
@@ -20,6 +21,8 @@
   "author": "nastassja90 <nas.bellisario@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.18.0",
+    "fastify": "^1.13.4",
     "micro-bot": "^2.5.1"
   },
   "devDependencies": {
