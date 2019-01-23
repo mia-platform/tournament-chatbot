@@ -7,13 +7,15 @@
 ## Usage
 
 ```sh
+$ set -a && source local.env
 $ npm install
-$ BOT_TOKEN='123:......' npm run dev
+$ npm run dev
 ```
 
 ```sh
-$ yarn
-$ BOT_TOKEN='123:......' yarn dev
+$ set -a && source local.env
+$ yarn install
+$ yarn dev
 ```
 
 ## Deployment

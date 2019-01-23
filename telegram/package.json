@@ -9,8 +9,9 @@
   "main": "index.js",
   "scripts": {
     "dev:mock-server": "node ./mock-server/index.js",
-    "dev": "supervisor -x micro-bot index.js",
-    "start": "micro-bot",
+    "dev:bot": "BOT_TOKEN=${BOT_TOKEN} supervisor -x micro-bot index.js",
+    "dev": "yarn dev:bot & yarn dev:mock-server",
+    "start": "BOT_TOKEN=${BOT_TOKEN} micro-bot",
     "now-start": "micro-bot -d ${NOW_URL}",
     "lint": "eslint .",
     "test": "npm run lint"

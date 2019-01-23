@@ -1,8 +1,9 @@
 const { Composer, log, session, Markup } = require('micro-bot')
 const axios = require('axios')
+const { HOST } = process.env
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/', // TODO: environment variable
+  baseURL: HOST,
   timeout: 1000
 })
 
@@ -23,9 +24,8 @@ bot.settings(({ reply }) => reply('Bot settings'))
 bot.command('create', async (ctx) => {
   const { reply, axios } = ctx
 
-  const response = (await axios.get('/types'))
+  const response = await axios.get('/types')
   const types = response.data
-  console.log('*********', axios)
   return reply('Crea un Torneo', Markup.keyboard([types])
     .resize()
     .extra()
