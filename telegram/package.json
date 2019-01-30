@@ -11,6 +11,7 @@
     "dev:mock-server": "node ./mock-server/index.js",
     "dev:bot": "BOT_TOKEN=${BOT_TOKEN} supervisor -x micro-bot index.js",
     "dev": "yarn dev:bot & yarn dev:mock-server",
+    "dev-sessions": "BOT_TOKEN=${BOT_TOKEN} supervisor -x micro-bot sessions.js",
     "start": "BOT_TOKEN=${BOT_TOKEN} micro-bot",
     "now-start": "micro-bot -d ${NOW_URL}",
     "lint": "eslint .",
@@ -24,7 +25,9 @@
   "dependencies": {
     "axios": "^0.18.0",
     "fastify": "^1.13.4",
-    "micro-bot": "^2.5.1"
+    "micro-bot": "^2.5.1",
+    "ramda": "^0.26.1",
+    "telegraf-session-local": "^0.0.6"
   },
   "devDependencies": {
     "eslint": "^5.9.0",
