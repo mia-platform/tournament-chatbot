@@ -11,7 +11,7 @@
     "dev:mock-server": "node ./mock-server/index.js",
     "dev:bot": "BOT_TOKEN=${BOT_TOKEN} supervisor -x micro-bot index.js",
     "dev": "yarn dev:bot & yarn dev:mock-server",
-    "dev-sessions": "BOT_TOKEN=${BOT_TOKEN} supervisor -x micro-bot sessions.js",
+    "dev-sessions": "BOT_TOKEN=${BOT_TOKEN} yarn dev:mock-server & supervisor -x micro-bot sessions.js",
     "start": "BOT_TOKEN=${BOT_TOKEN} micro-bot",
     "now-start": "micro-bot -d ${NOW_URL}",
     "lint": "eslint .",

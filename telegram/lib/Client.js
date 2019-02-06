@@ -27,10 +27,11 @@ class Client {
     }
   }
 
-  async createTournament ({ tournamentID, teams }) {
+  async createTournament ({ tournamentID, type, teams }) {
     try {
       await this.axioInstance.post(`/tournaments/`, {
         uid: tournamentID,
+        type,
         teams
       })
     } catch (error) {
