@@ -25,6 +25,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "fastify": "^1.13.4",
+    "jest": "^24.1.0",
     "micro-bot": "^2.5.1",
     "moxios": "^0.4.0",
     "ramda": "^0.26.1",

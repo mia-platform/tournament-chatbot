@@ -8,7 +8,7 @@ class Client {
   async getTournamentTypes () {
     try {
       const response = await this.axioInstance.get(`/tournaments/types/`)
-      return response.payload
+      return response.data
     } catch (error) {
       return new Error(`Cannot get tournament types: ${error.message}`)
     }
@@ -41,7 +41,7 @@ class Client {
   async getTournamentGames ({ tournamentID }) {
     try {
       const response = await this.axioInstance.get(`/tournaments/${tournamentID}/games/`)
-      return response.payload
+      return response.data
     } catch (error) {
       return new Error(`Cannot get games for tournament with id ${tournamentID}: ${error.message}`)
     }
