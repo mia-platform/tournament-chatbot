@@ -1,8 +1,19 @@
 const fastify = require('fastify')()
 
-const TOURNAMENT_TYPES = Object.freeze(['TYPE_A'])
+const TOURNAMENT_TYPES = Object.freeze([
+  {
+    id: 0,
+    name: 'TYPE_A',
+    description: 'description TYPE_A'
+  },
+  {
+    id: 1,
+    name: 'TYPE_B',
+    description: 'description TYPE_B'
+  }
+])
 
-fastify.get('/types', async (request, reply) => {
+fastify.get('/tournaments/types/', async (request, reply) => {
   return TOURNAMENT_TYPES
 })
 
