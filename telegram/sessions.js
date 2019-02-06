@@ -51,11 +51,14 @@ bot.command('create', async (ctx) => {
 
 bot.command('join', async (ctx) => {
   const { reply, message, sessionDB } = ctx
-  const { chat: { id: chatId }, from: { id: playerId }, text } = message
+  const { chat: { id: chatId }, text, entities } = message
 
-  const command = text.substring(1, text.length)
+  const botCommandEntity = entities[0]
+  const teamName = text.substring(botCommandEntity.length)
+  console.log('*********', teamName)
+
   const currentTournament = sessionDB
-    .get(command)
+    .get('tournaments')
     .getById(chatId)
     .value()
 
@@ -63,19 +66,19 @@ bot.command('join', async (ctx) => {
     return reply('You do not have initialized any tournament. Use the \'/create\' command to initialize it!')
   }
 
-  const { players } = currentTournament
-  if (R.includes(playerId, players)) {
-    return reply(`You have already requested to join this tournament. Wait for the others! This is the current player list: ${players}`)
+  const { teams } = currentTournament
+  if (R.includes(teamName, teams)) {
+    return reply(`This team name (${teamName}) has already been chosen`)
   }
 
-  const newPlayerList = R.append(playerId, players)
+  const newTeamsList = R.append(teamName, teams)
 
   sessionDB
-    .get(command)
-    .updateById(chatId, { players: newPlayerList })
+    .get('tournaments')
+    .updateById(chatId, { teams: newTeamsList })
     .write()
 
-  return reply(`You have been added to the tournament list. This is the current list: ${newPlayerList}`)
+  return reply(`You have been added to the tournament list. This is the current list: ${newTeamsList}`)
 })
 
 module.exports = bot

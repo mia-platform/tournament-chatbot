@@ -1,18 +1,15 @@
 {
-  "join": [
-    {
-      "id": 51935308,
-      "players": []
-    },
+  "tournaments": [
     {
       "id": -388144927,
-      "players": [
-        93045052,
-        208339204,
-        51935308
+      "teams": [
+        "n Luca",
+        "n Davide",
+        " Luca"
       ]
     }
   ],
   "sessions": [],
-  "create": []
+  "create": [],
+  "join": []
 }
