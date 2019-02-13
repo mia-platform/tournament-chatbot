@@ -36,11 +36,11 @@ interface Round {
   matches: Match[]
   ranking: RankingItem[]
   isCompleted: boolean
-  teams: Team[]
 }
 
 export interface SingleRoundTournament {
   round: Round
+  teams: Team[]
 }
 
 function createSingleRoundTournament (idGenerator: () => string, teams: Team[]): SingleRoundTournament {
@@ -69,8 +69,8 @@ function createSingleRoundTournament (idGenerator: () => string, teams: Team[]):
       matches,
       ranking: rankingItems,
       isCompleted: false,
-      teams
-    }
+    },
+    teams
   }
 }
 
