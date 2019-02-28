@@ -3,35 +3,67 @@ import * as express from 'express'
 import * as hyperid from 'hyperid'
 
 import axios from './lib/axios'
-import createTournamentByTypeWrapper, {SingleRoundTournament} from './lib/tournaments'
+import TournamentClass, {SingleRoundTournament} from './lib/tournaments'
 
 const generateId: () => string = hyperid({urlSafe: true})
 
 const app : express.Application = express();
 
-const createTournamentByType = createTournamentByTypeWrapper(generateId)
+const tournamentClass = new TournamentClass(generateId)
 
-// Add middleware to authenticate requests
-// app.use(myMiddleware);
-
-// build multiple CRUD interfaces:
+// Create tournament
 app.post('/tournaments/', async (req: express.Request, res: express.Response): Promise<void> => {
   const {body} = req
   try {
-    const tournament: SingleRoundTournament = createTournamentByType(body.type, body.teams)
+    const tournament: SingleRoundTournament = tournamentClass.createByType(body.type, body.teams)
     const {data} = await axios.post('/tournaments.json', tournament)
     res.status(200).send(data)
   } catch (error) {
     if (error.response) {
       res.status(error.response.statusCode).send(error.response.message)
     } else {
-      res.status(500).send('Something went wrong')
+      res.status(500).send(error.message || "Something went wrong")
     }
   }
 })
 
-// app.get('/:id', (req, res) => res.send(Widgets.getById(req.params.id)));
-// app.post('/', (req, res) => res.send(Widgets.create()));
+// Save game result
+app.post('/tournaments/:tournamentId/matches/:matchId', async (req: express.Request, res: express.Response): Promise<void> => {
+  const {body, params} = req
+  try {
+    const tournament: SingleRoundTournament = await tournamentClass.getTournamentById(params.tournamentId)
+    tournamentClass.updateTournamentMatch(tournament, params.matchId, body.scoreTeam1, body.scoreTeam2)
+    await tournamentClass.updateTournament(params.tournamentId, tournament)
+    res.status(200).send(tournament)
+  } catch (error) {
+    if (error.response) {
+      res.status(error.response.statusCode).send(error.response.message)
+    } else {
+      res.status(500).send(error.message || "Something went wrong")
+    }
+  }
+})
+
+// Get nex matches to play
+app.get('/tournaments/:tournamentId/matches-to-play', async (req: express.Request, res: express.Response): Promise<void> => {
+  const {params} = req
+  try {
+    const tournament: SingleRoundTournament = await tournamentClass.getTournamentById(params.tournamentId)
+    if (tournament.isCompleted) {
+      res.status(400).send({
+        message: 'Tournament is completed'
+      })
+    }
+    const matchesToPlayByType = tournamentClass.getRemainingMatchesToPlayByType(tournament)
+    res.status(200).send(matchesToPlayByType)
+  } catch (error) {
+    if (error.response) {
+      res.status(error.response.statusCode).send(error.response.message)
+    } else {
+      res.status(500).send(error.message || "Something went wrong")
+    }
+  }
+})
 
 // Expose Express API as a single Cloud Function:
 exports.tournaments = functions.https.onRequest(app);
