@@ -12,7 +12,7 @@ const options = {
 }
 const api = convexpress(options)
   .serveSwagger()
-  .loadFrom(`${__dirname}/routes/**/*.js`)
+  .loadFrom(`${__dirname}/api/**/*.js`)
 
 
 const app : express.Application = express().use(api);

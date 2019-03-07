@@ -11,9 +11,11 @@ exports.tags = ["tournaments"];
 exports.responses = {
   "200": {
     description: "tournament Id",
-    type: "object",
-    properties: {
-      name: {type: "string"}
+    schema: {
+      type: "object",
+      properties: {
+        name: {type: "string"}
+      }
     }
   }
 };
