@@ -68,17 +68,17 @@
             "description": "The user to create.",
             "schema": {
               "type": "object",
-              properties: {
-                uid: {
-                  type: "string"
+              "properties": {
+                "uid": {
+                  "type": "string"
                 },
-                type: {
-                  type: "string"
+                "type": {
+                  "type": "string"
                 },
-                teams: {
-                  type: "array",
-                  items: {
-                    type: "string"
+                "teams": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
                   }
                 }
               }
@@ -109,23 +109,23 @@
           "in": "path",
           "name": "tournamentId",
           "type": "string",
-          required: true,
-          description: "ID of the tournament"
+          "required": true,
+          "description": "ID of the tournament"
         }, {
           "in": "path",
           "name": "gameId",
           "type": "string",
-          required: true,
-          description: "ID of the game"
+          "required": true,
+          "description": "ID of the game"
         }],
         "responses": {
           "200": {
-            description: "success",
-            schema: {
-              type: "object",
-              properties: {
-                message: {
-                  type: "string"
+            "description": "success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
                 }
               }
            }
@@ -145,7 +145,7 @@
           "type": "string"
         },
         "description": {
-          "type": "string",
+          "type": "string"
         }
       }
     },
@@ -153,7 +153,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string",
+          "type": "string"
         },
         "games": {
           "type": "array",
