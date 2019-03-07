@@ -1,15 +1,13 @@
 {
-  "sessions": [],
-  "create": [],
-  "join": [],
-  "tournaments": [
+  "sessions": [
     {
-      "type": "TYPE_A",
-      "id": -388144927,
-      "teams": [
-        " Luca 🚀"
-      ],
-      "isStarted": true
+      "id": "93045052:-349562809",
+      "data": {
+        "tournament": {
+          "status": "JOINING",
+          "teams": []
+        }
+      }
     }
   ]
 }

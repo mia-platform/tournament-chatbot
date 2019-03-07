@@ -1,35 +1,44 @@
 const { Composer, log, session, Markup } = require('micro-bot')
-const axios = require('axios')
-const { HOST } = process.env
+const LocalSession = require('telegraf-session-local')
 
-const axiosInstance = axios.create({
-  baseURL: HOST,
-  timeout: 1000
-})
+const Client = require('./lib/Client')
+const Tournament = require('./lib/Tournament')
+
+const create = require('./commands/create')
+const join = require('./commands/join')
 
 const bot = new Composer()
+
 bot.use((ctx, next) => {
-  ctx.axios = axiosInstance
+  const client = new Client(process.env.HOST)
+  ctx.client = client
+  ctx.tournament = new Tournament()
   return next(ctx)
 })
 
 bot.use(log())
-bot.use(session())
-/* defaulT commands */
+bot.use((new LocalSession({
+  database:'./sessions/session.json',
+  getSessionKey: (ctx) => {
+    if (ctx.from && ctx.chat) {
+      return `${ctx.from.id}:${ctx.chat.id}`
+    } else if (ctx.from && ctx.inlineQuery) {
+      return `${ctx.from.id}:${ctx.from.id}`
+    }
+    return null
+  }
+})).middleware())
+
+bot.use((ctx, next) => {
+  ctx.tournament.loadFromSession(ctx.session)
+  next()
+})
+
 bot.start(({ reply }) => reply('Welcome message'))
 bot.help(({ reply }) => reply('Help message'))
 bot.settings(({ reply }) => reply('Bot settings'))
 
-/* custom commands */
-bot.command('create', async (ctx) => {
-  const { reply, axios } = ctx
-
-  const response = await axios.get('/types')
-  const types = response.data
-  return reply('Crea un Torneo', Markup.keyboard([types])
-    .resize()
-    .extra()
-  )
-})
+bot.command(create.command, create.handler)
+bot.command(join.command, join.handler)
 
 module.exports = bot

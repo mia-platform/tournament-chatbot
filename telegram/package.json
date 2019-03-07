@@ -15,7 +15,7 @@
     "start": "BOT_TOKEN=${BOT_TOKEN} micro-bot",
     "now-start": "micro-bot -d ${NOW_URL}",
     "lint": "eslint .",
-    "test": "npm run lint"
+    "test": "jest --watch"
   },
   "engines": {
     "node": ">=8.5.0"
