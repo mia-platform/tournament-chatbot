@@ -30,7 +30,8 @@
     "micro-bot": "^2.5.1",
     "moxios": "^0.4.0",
     "ramda": "^0.26.1",
-    "telegraf-session-local": "^0.0.6"
+    "telegraf-session-local": "^0.0.6",
+    "telegraf-session-redis": "^5.1.0"
   },
   "devDependencies": {
     "eslint": "^5.9.0",

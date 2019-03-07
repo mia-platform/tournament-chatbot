@@ -2,6 +2,7 @@
 
 const { Composer, log, session, Markup } = require('micro-bot')
 const LocalSession = require('telegraf-session-local')
+const RedisSession = require('telegraf-session-redis')
 
 const Client = require('./lib/Client')
 const Tournament = require('./lib/Tournament')
@@ -19,17 +20,35 @@ bot.use((ctx, next) => {
 })
 
 bot.use(log())
-bot.use((new LocalSession({
-  database:'./sessions/session.json',
-  getSessionKey: (ctx) => {
-    if (ctx.from && ctx.chat) {
-      return `${ctx.from.id}:${ctx.chat.id}`
-    } else if (ctx.from && ctx.inlineQuery) {
-      return `${ctx.from.id}:${ctx.from.id}`
+if (process.env.REDIS_HOST) {
+  bot.use((new RedisSession({
+    store: {
+      host: process.env.REDIS_HOST,
+      port: process.env.REDIS_PORT,
+      password: process.env.REDIS_PASSWORD,
+    },
+    getSessionKey: (ctx) => {
+      if (ctx.from && ctx.chat) {
+        return `${ctx.from.id}:${ctx.chat.id}`
+      } else if (ctx.from && ctx.inlineQuery) {
+        return `${ctx.from.id}:${ctx.from.id}`
+      }
+      return null
     }
-    return null
-  }
-})).middleware())
+  })).middleware())
+} else {
+  bot.use((new LocalSession({
+    database:'./sessions/session.json',
+    getSessionKey: (ctx) => {
+      if (ctx.from && ctx.chat) {
+        return `${ctx.from.id}:${ctx.chat.id}`
+      } else if (ctx.from && ctx.inlineQuery) {
+        return `${ctx.from.id}:${ctx.from.id}`
+      }
+      return null
+    }
+  })).middleware())
+}
 
 bot.use((ctx, next) => {
   ctx.tournament.loadFromSession(ctx.session)
