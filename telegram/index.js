@@ -1,3 +1,5 @@
+'use strict'
+
 const { Composer, log, session, Markup } = require('micro-bot')
 const LocalSession = require('telegraf-session-local')
 
@@ -55,5 +57,9 @@ bot.command('results', async (ctx) => {
   return reply(`il tuo torneo: ${JSON.stringify(data)}`)
 
 })
+
+require('express')().get('/', function (req, res) {
+  res.send('Hello World')
+}).listen(process.env.PORT)
 
 module.exports = bot

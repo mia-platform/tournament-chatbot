@@ -12,7 +12,7 @@
     "dev:bot": "BOT_TOKEN=${BOT_TOKEN} supervisor -x micro-bot index.js",
     "dev": "yarn dev:bot & yarn dev:mock-server",
     "dev-sessions": "BOT_TOKEN=${BOT_TOKEN} yarn dev:mock-server & supervisor -x micro-bot sessions.js",
-    "start": "BOT_TOKEN=${BOT_TOKEN} micro-bot",
+    "start": "BOT_TOKEN=${BOT_TOKEN} micro-bot -p $PORT",
     "now-start": "micro-bot -d ${NOW_URL}",
     "lint": "eslint .",
     "test": "jest --watch"
@@ -24,6 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
+    "express": "^4.16.4",
     "fastify": "^1.13.4",
     "jest": "^24.1.0",
     "micro-bot": "^2.5.1",
