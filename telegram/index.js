@@ -43,8 +43,7 @@ bot.command(join.command, join.handler)
 
 /* save results */
 bot.command('results', async (ctx) => {
-  const { reply, axios, session, message } = ctx
-  const { tournament } = session
+  const { reply, axios, tournament, message } = ctx
   const tournamentId = tournament.id
   const { text, entities } = message
   const commands = text.substring(entities[0].length)
