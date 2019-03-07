@@ -51,12 +51,12 @@ interface Round {
   isCompleted: boolean
 }
 
-interface SemiFinalMatches {
+export interface SemiFinalMatches {
   isCompleted: boolean
   matches: [Match, Match]
 }
 
-interface FinalMatch {
+export interface FinalMatch {
   isCompleted: boolean
   match: Match
 }
