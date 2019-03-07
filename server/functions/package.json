@@ -11,8 +11,12 @@
     "test": "ts-node ./node_modules/.bin/tape **/*.test.ts"
   },
   "main": "lib/index.js",
+  "engines": {
+    "node": "8"
+  },
   "dependencies": {
     "axios": "^0.18.0",
+    "convexpress": "^2.3.0",
     "express": "^4.16.4",
     "firebase-admin": "~6.0.0",
     "firebase-functions": "^2.1.0",
