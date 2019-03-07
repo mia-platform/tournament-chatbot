@@ -49,6 +49,9 @@ exports.handler = async (req: express.Request, res: express.Response): Promise<v
   const {body, params} = req
   try {
     const tournament: SingleRoundTournament = await tournamentClass.getTournamentById(params.tournamentId)
+    if (!tournament) {
+      res.sendStatus(404)
+    }
     tournamentClass.updateTournamentMatch(tournament, params.matchId, body.scoreTeam1, body.scoreTeam2)
     await tournamentClass.updateTournament(params.tournamentId, tournament)
     res.status(200).send(tournament)

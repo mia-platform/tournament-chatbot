@@ -34,6 +34,9 @@ exports.handler = async (req: express.Request, res: express.Response): Promise<v
   const {params, query} = req
   try {
     const tournament: SingleRoundTournament = await tournamentClass.getTournamentById(params.tournamentId)
+    if (!tournament) {
+      res.sendStatus(404)
+    }
     if (tournament.isCompleted) {
       res.status(400).send({
         message: 'Tournament is completed'
