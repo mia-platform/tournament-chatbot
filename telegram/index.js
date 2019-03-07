@@ -41,4 +41,20 @@ bot.settings(({ reply }) => reply('Bot settings'))
 bot.command(create.command, create.handler)
 bot.command(join.command, join.handler)
 
+/* save results */
+bot.command('results', async (ctx) => {
+  const { reply, axios, session, message } = ctx
+  const { tournament } = session
+  const tournamentId = tournament.id
+  const { text, entities } = message
+  const commands = text.substring(entities[0].length)
+  const [, matchId, , scoreTeam1, , scoreTeam2 ] = commands.split(' ')
+
+  const response = await axios.post(`/tournaments/${tournamentId}/matches/${matchId}`, { scoreTeam1, scoreTeam2 })
+  const { data } = response
+
+  return reply(`il tuo torneo: ${JSON.stringify(data)}`)
+
+})
+
 module.exports = bot
