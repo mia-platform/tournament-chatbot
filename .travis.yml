@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+- '8'
+script:
+- npm run lint
+notifications:
+  email:
+    on_success: never
+    on_failure: always
+deploy:
+  provider: heroku
+  app: limelab-tournament-bot
+  on: travis
+  api_key:
+    secure: p/EvZOf6qUNoZbcrN3Cd0laiIn+T+KT4XjBB2iUZCxSLBvMC1/iiptkwAqRURnuLHX/siHQXzp37jSO6wmPcvC5ahiOtw2x8KhYMfWTLtR1WwwTq14Cd263OcOp6S3mpuKRFGJeM4KNEkcA/M9m/BOnISwgKnuwbidD5ID42zFoerzg7qC3eKYRiRRnhS2gu4Hg4ZgobuKjDNER6C2WtJy/GNcrCHYnlTmrXRFyHECMSDOVVx5M0HQ5sWuCPTJJJqxoNZMyBKuZgRjDRlay5DwotXt+oMy4EhjsV0YX/RSTXcwN19tnrDquQpkSOVqjxT+8NojOVuaX0twggfs2H2chTV1NlOt6zQxtAyf4jIIWRnd8kjlKHpNaSJQFzqSnU4P1/2SIK5VB6xmvht46mtA8//0Nc4/j1/Bs3ZvNyWWmqVlRuIogtRvGcF2e/G7Wl/ESVrK00relu/URs+4KfBtH6ZLzLnRKh+ybTDOVpiHKtR3Hol296nJTiqUNOPlQJ79h6ORUsk1jb4GxOa1mU5gFzI1569YW+X/Q30o5zA+dSLpX7KV8VewZztmRCqIh2zU87YWwuSPAct/H0cYbjo6+trsNqYJ+VBycm0bwybP8vvVXQMrHzUiCRDEFSmDPyI+mUUi65Y7bhq7p4EdDSLA/tDEegUvfOFlcPELoiIOQ=
