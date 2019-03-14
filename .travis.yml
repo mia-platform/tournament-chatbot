@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - '8'
 script:
-- cd telegram
+- echo "ciao"
 notifications:
   email:
     on_success: never
