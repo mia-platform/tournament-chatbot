@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - '8'
 script:
-- cd tournament && npm run lint
+- cd telegram && npm run lint
 notifications:
   email:
     on_success: never
