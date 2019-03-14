@@ -2,13 +2,13 @@ const axios = require('axios')
 
 class Client {
   constructor ({ baseURL }) {
-    this.axioInstance = axios.create({ baseURL })
+    this.axiosInstance = axios.create({ baseURL })
   }
 
   //WIP
   async getTournamentTypes () {
     try {
-      const response = await this.axioInstance.get(`/tournaments/types/`)
+      const response = await this.axiosInstance.get(`/tournaments/types/`)
       return response.data
     } catch (error) {
       return new Error(`Cannot get tournament types: ${error.message}`)
@@ -18,7 +18,7 @@ class Client {
   //WIP
   async isTournamentActive (tournamentID) {
     try {
-      await this.axioInstance.get(`/tournaments/${tournamentID}`)
+      await this.axiosInstance.get(`/tournaments/${tournamentID}`)
       return true
     } catch (error) {
       if (error.statusCode === 404) {
@@ -32,7 +32,7 @@ class Client {
   //createTournament creates the tournament and returns the identifier of the tournament
   async createTournament ({type, teams }) {
     try {
-      const {name} = await this.axioInstance.post(`/tournaments/`, {
+      const {name} = await this.axiosInstance.post(`/tournaments/`, {
         type,
         teams
       })
@@ -42,7 +42,18 @@ class Client {
     }
   }
 
-  
+  //get tournament results
+  async recordMatchScores (matchId, tournamentId, scoreTeam1, scoreTeam2) {
+    try {
+      const response = await this.axiosInstance.post(`/tournaments/${tournamentId}/matches/${matchId}`, { scoreTeam1, scoreTeam2 })
+      const { data } = response
+
+      return `il tuo torneo: ${JSON.stringify(data)}`
+
+    } catch (error) {
+      return new Error(`Cannot save results ${tournamentId}: ${error.message}`)
+    }
+  }
 
 
 
@@ -51,11 +62,13 @@ class Client {
 
 
 
-  
+
+
+
 
   async getTournamentMatch ({ tournamentID, matchID }) {
     try {
-      const response = await this.axioInstance.get(`/tournaments/${tournamentID}/matches/${matchID}`)
+      const response = await this.axiosInstance.get(`/tournaments/${tournamentID}/matches/${matchID}`)
       return response.data
     } catch (error) {
       return new Error(`Cannot get games for tournament with id ${tournamentID}: ${error.message}`)

@@ -43,16 +43,14 @@ bot.command(join.command, join.handler)
 
 /* save results */
 bot.command('results', async (ctx) => {
-  const { reply, axios, tournament, message } = ctx
+  const { reply, tournament, message } = ctx
   const tournamentId = tournament.id
   const { text, entities } = message
   const commands = text.substring(entities[0].length)
   const [, matchId, , scoreTeam1, , scoreTeam2 ] = commands.split(' ')
 
-  const response = await axios.post(`/tournaments/${tournamentId}/matches/${matchId}`, { scoreTeam1, scoreTeam2 })
-  const { data } = response
-
-  return reply(`il tuo torneo: ${JSON.stringify(data)}`)
+  const result = await ctx.client.recordMatchScores(matchId, tournamentId, scoreTeam1, scoreTeam2)
+  return reply(result)
 
 })
 
