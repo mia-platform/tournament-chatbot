@@ -25,7 +25,7 @@ if (process.env.REDIS_HOST) {
     store: {
       host: process.env.REDIS_HOST,
       port: process.env.REDIS_PORT,
-      password: process.env.REDIS_PASSWORD,
+      password: process.env.REDIS_PASSWORD
     },
     getSessionKey: (ctx) => {
       if (ctx.from && ctx.chat) {
@@ -38,7 +38,7 @@ if (process.env.REDIS_HOST) {
   })).middleware())
 } else {
   bot.use((new LocalSession({
-    database:'./sessions/session.json',
+    database: './sessions/session.json',
     getSessionKey: (ctx) => {
       if (ctx.from && ctx.chat) {
         return `${ctx.from.id}:${ctx.chat.id}`
@@ -72,7 +72,6 @@ bot.command('results', async (ctx) => {
 
   const result = await ctx.client.recordMatchScores(matchId, tournamentId, scoreTeam1, scoreTeam2)
   return reply(result)
-
 })
 
 require('express')().get('/', function (req, res) {
