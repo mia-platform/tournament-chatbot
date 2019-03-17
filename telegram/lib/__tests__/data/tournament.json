@@ -1,0 +1,16 @@
+{
+  "round": {
+    "matches": [],
+    "ranking": [],
+    "isCompleted": false
+  },
+  "teams": [
+    {
+      "name": "Milan"
+    },
+    {
+      "name": "Inter"
+    }
+  ],
+  "isCompleted": false
+}

@@ -1,0 +1,11 @@
+{
+  "type": "ROUND",
+  "matches": [
+    {
+      "id": "001",
+      "team1": "Milan",
+      "team2": "Fiorentina",
+      "isPlayed": false
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+[
+  {
+    "team1": "Milan",
+    "team2": "Inter",
+    "isPlayed": true,
+    "result": {
+      "id": "001",
+      "scoreTeam1": 0,
+      "scoreTeam2": 3,
+      "winner": "TEAM_2"
+    }
+  },
+  {
+    "id": "001",
+    "team1": "Milan",
+    "team2": "Fiorentina",
+    "isPlayed": false
+  }
+]
