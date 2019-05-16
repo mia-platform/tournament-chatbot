@@ -2,7 +2,7 @@ import * as express from 'express'
 import * as hyperid from 'hyperid'
 
 import axios from '../../lib/axios'
-import TournamentClass, {SingleRoundTournament} from "../../lib/tournaments"
+import TournamentClass, {SingleRoundTournament, TournamentType} from "../../lib/tournaments"
 
 exports.path = '/tournaments'
 exports.method = 'post'
@@ -21,20 +21,28 @@ exports.responses = {
 };
 exports.parameters = [
   {
-    name: "team name",
     in: "body",
     required: true,
     schema: {
-      type: "array",
-      items: {
-        type: "object",
-        properties: {
-          name: {type: "string"}
+      type: "object",
+      properties: {
+        teams: {
+          type: "array",
+          items: {
+            type: "object",
+            properties: {
+              name: {type: "string"}
+            },
+            additionalProperties: false,
+            required: ["name"]
+          },
+          minLength: 4
         },
-        additionalProperties: false,
-        required: ["name"]
-      },
-      minLength: 4
+        type: {
+          type: "string",
+          enum: [TournamentType.SINGLE_ROUND]
+        }
+      }
     }
   }
 ];

@@ -1,7 +1,7 @@
 function generateNextBase (data: string[], base: string[], fromIndex: number, combinationsLength: number): string[][] {
   if (base.length === combinationsLength) return [base]
   const combinations = []
-  for(let i = fromIndex + 1; i < data.length; i++) {
+  for (let i = fromIndex + 1; i < data.length; i++) {
     const element = data[i]
     const elementBase = [...base, element]
     combinations.push(...generateNextBase(data, elementBase, i, combinationsLength))
