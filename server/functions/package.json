@@ -15,7 +15,7 @@
     "node": "8"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "convexpress": "^2.3.0",
     "express": "^4.16.4",
     "firebase-admin": "~7.0.0",
@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@types/tape": "^4.2.33",
-    "firebase-tools": "^6.4.0",
+    "firebase-tools": "^6.10.0",
     "tape": "^4.10.1",
     "ts-node": "^8.0.3",
     "tslint": "^5.13.1",

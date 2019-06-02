@@ -9,7 +9,7 @@
   "main": "index.js",
   "scripts": {
     "dev:mock-server": "node ./mock-server/index.js",
-    "dev:bot": "BOT_TOKEN=${BOT_TOKEN} supervisor -x micro-bot index.js",
+    "dev:bot": "BOT_TOKEN=token supervisor -x micro-bot index.js",
     "dev": "yarn dev:bot & yarn dev:mock-server",
     "dev-sessions": "BOT_TOKEN=${BOT_TOKEN} yarn dev:mock-server & supervisor -x micro-bot sessions.js",
     "start": "BOT_TOKEN=${BOT_TOKEN} micro-bot -p $PORT",
@@ -23,14 +23,11 @@
   "author": "nastassja90 <nas.bellisario@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0",
-    "express": "^4.16.4",
-    "fastify": "^1.13.4",
-    "jest": "^24.1.0",
-    "micro-bot": "^2.5.1",
-    "moxios": "^0.4.0",
+    "axios": "^0.19.0",
+    "express": "^4.17.1",
+    "micro-bot": "^2.5.3",
     "ramda": "^0.26.1",
-    "telegraf-session-local": "^0.0.6",
+    "telegraf-session-local": "^0.0.7",
     "telegraf-session-redis": "^5.1.0"
   },
   "devDependencies": {
@@ -40,6 +37,9 @@
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
+    "fastify": "^1.13.4",
+    "jest": "^24.1.0",
+    "moxios": "^0.4.0",
     "supervisor": "^0.12.0"
   }
 }
