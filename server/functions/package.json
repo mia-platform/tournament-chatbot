@@ -15,7 +15,7 @@
     "node": "8"
   },
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "convexpress": "^2.3.0",
     "express": "^4.16.4",
     "firebase-admin": "~7.0.0",
